@@ -1,0 +1,13 @@
+{
+  "name": "getdata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "MiaoS",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "mongoose": "^4.9.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0"
+  }
+}
