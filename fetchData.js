@@ -11,7 +11,7 @@ var options=function(){return{
 	uri:'https://earthquake.usgs.gov/fdsnws/event/1/query',
 	qs:{
 		format:'geojson',
-		starttime:(new Date((new Date()).valueOf() - 24*60*60*1000)).toISOString(),
+		starttime:(new Date((new Date()).valueOf() - 31*60*1000)).toISOString(),
 		eventtype:'earthquake',
 		//endtime:end.toISOString(),
 		minmagnitude:3,
