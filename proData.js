@@ -1,6 +1,19 @@
-"use strict";
+
 var Feature=require("./Feature");
+var country=require("./countries").countries;
+var getCountryItem =function(){
+	var countryItem={};
+	country.forEach(function(item){
+		countryItem[item.English.substring(1)]=[];
+		countryItem[item.English.substring(1)].push(item.ISO3);
+		countryItem[item.English.substring(1)].push(item.China);
+	});
+	
+	return countryItem;
+}
+var items=getCountryItem();
 exports.proData=function(feature){
+	if(feature.properties.mag){
 	delete feature.properties.updated;
 	delete feature.properties.detail;
 	delete feature.properties.felt;
@@ -23,6 +36,8 @@ exports.proData=function(feature){
 	delete feature.id;
 	
 	feature.properties.country=getCountry(feature.properties.place);
+	feature.properties.iso3= items[feature.properties.country]?items[feature.properties.country][0]:null;
+	feature.properties.zh= items[feature.properties.country]?items[feature.properties.country][1]:null;
 	var ids= feature.properties.ids;
 	
 	feature.properties.ids=[];
@@ -32,25 +47,21 @@ exports.proData=function(feature){
 		feature.properties.ids.push(arrayOfIds[i]);
 	}
 
-	console.log(feature);
-
 	var f=new Feature(feature);
 	f.save(function(err){
-		if(err)
-		console.log(err);
-		else{
-			console.log("saved data:");
-			console.log(feature);
-		}
+		return;
 	})
+	}else{
+	return;
+}
 
 };
 
 var getCountry=function(place){
 	var arrayOfPlace= place.split(", ");
-	console.log(arrayOfPlace[arrayOfPlace.length-1]);
 	
-	var states=["Alabama", "Alaska","Arizona","Arkansas", "California","Colorado",
+	
+	var states=["Alabama", "Alaska","Arizona","Arkansas", "California","Northern California","Colorado",
 		"Connecticut", "Delaware", "Florida", "Georgia", "Hawaii","Idaho", 
 		"Illinois","Indiana","Iowa", "Kansas","Kentucky","Louisiana","Maine",
 		"Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri",

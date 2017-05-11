@@ -14,9 +14,11 @@ var feature = new Schema({
 		tz:{type:Number},
 		url:String,
 		alert:String,
-		ids:[{type:String}],
-		magType:{type:String},
+		//ids:[{type:String}],
+		//magType:{type:String},
 		country:String,
+		iso3:String,
+		zh:String
 	},
 	geometry:{
 		type:{type:String,default:"Point"},
@@ -25,5 +27,5 @@ var feature = new Schema({
         _id:{type:String,required:true, unique:true}
 })
 
-var Feature=mongoose.model("Feature",feature);
+var Feature=mongoose.model("EarthquakeInfo",feature,"earthquakeInfo");
 module.exports=Feature;
